@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb';
-import { getDatabase } from '../config/database';
-import { Ride } from '../types/types';
+import { getDatabase } from '../config/database.js';
+import { Ride } from '../types/types.js';
 import 'dotenv/config';
 
 const { COLLECTION_RIDES } = process.env;
