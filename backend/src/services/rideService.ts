@@ -19,25 +19,21 @@ export class RideService {
   static async findRides(customer_id: string, driver_id?: number) {
     const rides = await getRidesByCustomerId(customer_id, driver_id);
 
-    // {
-    //   "customer_id": string,
-    //   "rides": [
-    //    {
-    //      "id": number,
-    //      "date": datetime,
-    //      "origin": string,
-    //      "destination": string,
-    //      "distance": number,
-    //      "duration": string,
-    //      "driver": {
-    //      "id": number,
-    //      "name": string
-    //    },
-    //    "value": number
-    //    }
-    //  ]
-    // }
-
-    return { customer_id, rides };
+    return {
+      customer_id,
+      rides: rides.map((ride) => ({
+        id: ride._id,
+        date: ride.createdAt,
+        origin: ride.origin,
+        destination: ride.destination,
+        distance: ride.distance,
+        duration: ride.duration,
+        driver: {
+          id: ride.driver.id,
+          name: ride.driver.name,
+        },
+        value: ride.value,
+      })),
+    };
   }
 }
