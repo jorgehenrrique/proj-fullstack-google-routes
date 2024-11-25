@@ -26,6 +26,20 @@ export async function getRideById(id: string) {
   return await collection.findOne({ _id: new ObjectId(id) });
 }
 
+export async function getRidesByCustomerId(
+  customer_id: string,
+  driver_id?: number
+) {
+  const db = await getDatabase();
+  const collection = db.collection<Ride>(COLLECTION_RIDES!);
+
+  const query = driver_id
+    ? { customer_id, 'driver.id': driver_id }
+    : { customer_id };
+
+  return await collection.find(query).sort({ createdAt: -1 }).toArray();
+}
+
 // export async function updateRideById(id: string, ride: Ride) {
 //   const db = await getDatabase();
 //   const collection = db.collection<Ride>(COLLECTION_RIDES!);

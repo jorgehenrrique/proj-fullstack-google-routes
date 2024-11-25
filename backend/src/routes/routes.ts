@@ -7,6 +7,7 @@ import {
 import {
   validateConfirmRide,
   validateEstimateRide,
+  validateGetRide,
 } from '../middlewares/rideValidation.js';
 
 const router: Router = express.Router();
@@ -22,7 +23,7 @@ router.patch(
 );
 // Responsável por confirmar a viagem e gravá-la no histórico.
 
-router.get('/ride', getRide);
+router.get('/:customer_id', validateGetRide, getRide);
 // Responsável por listar as viagens realizadas por um determinado usuário
 
 export default router;

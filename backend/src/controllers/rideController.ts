@@ -84,9 +84,45 @@ export async function confirmRide(req: Request, res: Response) {
 
 export async function getRide(req: Request, res: Response) {
   try {
+    const { customer_id } = req.params;
+    const { driver_id } = req.query;
+
+    const user = await UserService.validateUser(customer_id);
+    if (!user) {
+      res.status(404).json({
+        error_code: 'USER_NOT_FOUND',
+        error_description: 'Usuário não encontrado',
+      });
+      return;
+    }
+
+    if (driver_id) {
+      const driver = await DriverService.validateDriver(Number(driver_id));
+      if (!driver) {
+        res.status(400).json({
+          error_code: 'INVALID_DRIVER',
+          error_description: 'Motorista inválido',
+        });
+        return;
+      }
+    }
+
+    const rides = await RideService.findRides(
+      customer_id,
+      driver_id ? Number(driver_id) : undefined
+    );
+    if (!rides || rides.length === 0) {
+      res.status(404).json({
+        error_code: 'NO_RIDES_FOUND',
+        error_description: 'Nenhum registro encontrado',
+      });
+      return;
+    }
+
+    res.json(rides);
   } catch (error) {
     const err =
-      error instanceof Error ? error.message : 'Erro ao confirmar corrida';
+      error instanceof Error ? error.message : 'Erro ao listar corridas';
     res.status(500).json({
       error_code: 'INTERNAL_SERVER_ERROR',
       error_description: err,

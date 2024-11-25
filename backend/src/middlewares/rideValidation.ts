@@ -9,7 +9,7 @@ export function validateEstimateRide(
   //   "customer_id": string,
   //   "origin": string,
   //   "destination": string
-  //   }
+  // }
   const { customer_id, origin, destination } = req.body;
 
   const errors: string[] = [];
@@ -63,7 +63,7 @@ export function validateConfirmRide(
   //   "name": string
   //   },
   //   "value": number
-  //   }
+  // }
   const { distance, duration, driver, value } = req.body;
 
   const errors: string[] = [];
@@ -90,6 +90,37 @@ export function validateConfirmRide(
 
   if (typeof duration !== 'string' || typeof driver.name !== 'string') {
     errors.push('Duração e nome do motorista devem ser strings');
+  }
+
+  if (errors.length > 0) {
+    res.status(400).json({
+      error_code: 'INVALID_DATA',
+      error_description: errors.join(', '),
+    });
+    return;
+  }
+
+  next();
+}
+
+export function validateGetRide(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  // GET /ride/{customer_id}?driver_id={id do motorista}
+  const { customer_id } = req.params;
+  const { driver_id } = req.query;
+
+  const errors: string[] = [];
+
+  if (!customer_id) errors.push('ID do usuário não pode estar em branco');
+
+  if (driver_id) {
+    const driverIdNumber = Number(driver_id);
+    if (isNaN(driverIdNumber) || driverIdNumber <= 0) {
+      errors.push('ID do motorista deve ser um número válido');
+    }
   }
 
   if (errors.length > 0) {
