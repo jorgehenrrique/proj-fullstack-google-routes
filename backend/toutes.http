@@ -1,0 +1,30 @@
+GET http://localhost:8080/ride
+###
+
+POST http://localhost:8080/ride/estimate
+Content-Type: application/json
+
+{
+  "customer_id": "1",
+  "origin": "Rua das Flores, 123, São Paulo, SP",
+  "destination": "Av. Paulista, 1000, São Paulo, SP"
+}
+
+###
+
+PATCH http://localhost:8080/ride/confirm
+Content-Type: application/json
+
+{
+  "customer_id": "1",
+  "origin": "Rua das Flores, 123, São Paulo, SP",
+  "destination": "Av. Paulista, 1000, São Paulo, SP",
+  "distance": 10,
+  "duration": "10 minutos",
+  "driver": {
+    "id": 3,
+    "name": "Motorista Teste"
+  },
+  "value": 10
+}
+###
