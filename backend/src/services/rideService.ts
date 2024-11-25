@@ -17,6 +17,27 @@ export class RideService {
   }
 
   static async findRides(customer_id: string, driver_id?: number) {
-    return await getRidesByCustomerId(customer_id, driver_id);
+    const rides = await getRidesByCustomerId(customer_id, driver_id);
+
+    // {
+    //   "customer_id": string,
+    //   "rides": [
+    //    {
+    //      "id": number,
+    //      "date": datetime,
+    //      "origin": string,
+    //      "destination": string,
+    //      "distance": number,
+    //      "duration": string,
+    //      "driver": {
+    //      "id": number,
+    //      "name": string
+    //    },
+    //    "value": number
+    //    }
+    //  ]
+    // }
+
+    return { customer_id, rides };
   }
 }

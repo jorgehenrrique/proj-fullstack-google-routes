@@ -111,7 +111,7 @@ export async function getRide(req: Request, res: Response) {
       customer_id,
       driver_id ? Number(driver_id) : undefined
     );
-    if (!rides || rides.length === 0) {
+    if (!rides || rides.rides.length === 0) {
       res.status(404).json({
         error_code: 'NO_RIDES_FOUND',
         error_description: 'Nenhum registro encontrado',

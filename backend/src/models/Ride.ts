@@ -40,16 +40,16 @@ export async function getRidesByCustomerId(
   return await collection.find(query).sort({ createdAt: -1 }).toArray();
 }
 
-// export async function updateRideById(id: string, ride: Ride) {
-//   const db = await getDatabase();
-//   const collection = db.collection<Ride>(COLLECTION_RIDES!);
+export async function updateRideById(id: string, ride: Ride) {
+  const db = await getDatabase();
+  const collection = db.collection<Ride>(COLLECTION_RIDES!);
 
-//   return await collection.updateOne({ _id: new ObjectId(id) }, { $set: ride });
-// }
+  return await collection.updateOne({ _id: new ObjectId(id) }, { $set: ride });
+}
 
-// export async function deleteRideById(id: string) {
-//   const db = await getDatabase();
-//   const collection = db.collection<Ride>(COLLECTION_RIDES!);
+export async function deleteRideById(id: string) {
+  const db = await getDatabase();
+  const collection = db.collection<Ride>(COLLECTION_RIDES!);
 
-//   return await collection.deleteOne({ _id: new ObjectId(id) });
-// }
+  return await collection.deleteOne({ _id: new ObjectId(id) });
+}
