@@ -28,6 +28,8 @@ export function RideHistory() {
       });
       return;
     }
+    console.log(customerId);
+    console.log(driverId);
 
     setIsLoading(true);
     try {
@@ -36,6 +38,8 @@ export function RideHistory() {
         driverId
       );
       setRides(result.rides);
+      console.log(result.rides);
+      console.log(result);
     } catch (error) {
       toast({
         title: 'Erro',
@@ -48,8 +52,8 @@ export function RideHistory() {
   }
 
   return (
-    <div className='space-y-4'>
-      <div className='flex space-x-2'>
+    <div className='container mx-auto flex flex-col space-y-4 h-full'>
+      <div className='w-full mx-auto flex space-x-2'>
         <Input
           placeholder='ID do Usuário'
           value={customerId}
@@ -66,16 +70,6 @@ export function RideHistory() {
           </SelectTrigger>
           <SelectContent>
             <SelectItem value='0'>Todos</SelectItem>
-            {/* Populate with actual driver options */}
-            {rides.map((ride) => (
-              <SelectItem
-                key={ride.driver.id}
-                value={ride.driver.id.toString()}
-              >
-                {ride.driver.name}
-              </SelectItem>
-            ))}
-            {/* Remove duplicates */}
             {Array.from(new Set(rides.map((ride) => ride.driver.id))).map(
               (driverId) => {
                 const driver = rides.find(
@@ -95,22 +89,24 @@ export function RideHistory() {
         </Button>
       </div>
 
-      {rides.map((ride) => (
-        <Card key={ride.id}>
-          <CardHeader>
-            <CardTitle>Corrida #{ride.id}</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p>Data: {new Date(ride.date).toLocaleString()}</p>
-            <p>Origem: {ride.origin}</p>
-            <p>Destino: {ride.destination}</p>
-            <p>Motorista: {ride.driver.name}</p>
-            <p>Distância: {ride.distance} km</p>
-            <p>Duração: {ride.duration}</p>
-            <p>Valor: R$ {ride.value}</p>
-          </CardContent>
-        </Card>
-      ))}
+      <div className='space-y-4 pb-8'>
+        {rides.map((ride, index) => (
+          <Card key={ride.id + index}>
+            <CardHeader>
+              <CardTitle>Corrida #{ride.id}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p>Data: {new Date(ride.date).toLocaleString()}</p>
+              <strong>Motorista: {ride.driver.name}</strong>
+              <p>Origem: {ride.origin}</p>
+              <p>Destino: {ride.destination}</p>
+              <p>Distância: {ride.distance.toFixed(2)} km</p>
+              <p>Duração: {ride.duration}</p>
+              <p>Valor: R$ {ride.value.toFixed(2)}</p>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
     </div>
   );
 }

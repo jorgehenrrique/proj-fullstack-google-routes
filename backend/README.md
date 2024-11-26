@@ -99,7 +99,7 @@ Esta API gerencia corridas, permitindo estimativa, confirmação e listagem de v
   "customer_id": "string",
   "rides": [
     {
-      "id": number,
+      "id": "string",
       "date": "datetime",
       "origin": "string",
       "destination": "string",

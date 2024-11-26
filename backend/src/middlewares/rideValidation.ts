@@ -118,7 +118,7 @@ export function validateGetRide(
 
   if (driver_id) {
     const driverIdNumber = Number(driver_id);
-    if (isNaN(driverIdNumber) || driverIdNumber <= 0) {
+    if (isNaN(driverIdNumber) || driverIdNumber < 0) {
       errors.push('ID do motorista deve ser um número válido');
     }
   }

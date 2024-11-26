@@ -4,9 +4,11 @@ import { Toaster } from './components/ui/toaster';
 
 function App() {
   return (
-    <div className='containe mx-auto border-b h-screen'>
+    <div className='min-h-screen flex flex-col mx-auto h-screen'>
       <Header />
-      <Outlet /> {/* Renderiza as rotas filhas */}
+      <main className='flex-grow pt-20'>
+        <Outlet />
+      </main>
       <Toaster />
     </div>
   );
