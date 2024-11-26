@@ -119,6 +119,7 @@ Esta API gerencia corridas, permitindo estimativa, confirmação e listagem de v
 
 - `400 Bad Request`: Dados inválidos
 - `404 Not Found`: Recurso não encontrado
+- `406 Not Acceptable`: Recurso não aceito
 - `500 Internal Server Error`: Erro no servidor
 
 ## Validações

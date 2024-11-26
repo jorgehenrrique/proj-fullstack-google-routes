@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "description": "Projeto Backend API REST, Google routes",
+  "description": "Projeto Backend API REST, Google routes ride app",
   "main": "dist/server.js",
   "scripts": {
     "start": "node dist/server.js",
