@@ -94,7 +94,7 @@ ride-app/
 │   ├── .env
 │   ├── package.json
 │   ├── tsconfig.json
-│   ├── toutes.http
+│   ├── routes.http
 │   └── README.md
 │
 ├── frontend/
