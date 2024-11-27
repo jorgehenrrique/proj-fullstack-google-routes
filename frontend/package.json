@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "description": "Projeto Frontend, Google routes ride app",
   "type": "module",
+  "author": "Jorge Henrique",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
@@ -11,6 +12,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@googlemaps/google-maps-services-js": "^3.4.0",
     "@hookform/resolvers": "^3.9.1",
     "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-select": "^2.1.2",

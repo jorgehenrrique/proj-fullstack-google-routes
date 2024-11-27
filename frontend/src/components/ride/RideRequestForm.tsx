@@ -46,7 +46,7 @@ export function RideRequestForm() {
           requestData: values,
         },
       });
-      console.log(estimate);
+      console.log(estimate); // TODO: remover
     } catch (error) {
       toast({
         title: 'Erro',

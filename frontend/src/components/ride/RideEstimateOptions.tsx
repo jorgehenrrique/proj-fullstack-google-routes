@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '../ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
@@ -10,6 +10,7 @@ export function RideEstimateOptions() {
   const location = useLocation();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const [mapUrl, setMapUrl] = useState('');
 
   const { estimate, requestData } =
     location.state ||
@@ -17,6 +18,40 @@ export function RideEstimateOptions() {
       estimate: RideEstimate;
       requestData: RideRequest;
     });
+
+  const generateStaticMapUrl = useCallback(() => {
+    // Construir URL do mapa estático do Google
+    const baseUrl = 'https://maps.googleapis.com/maps/api/staticmap';
+    const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
+    console.log(apiKey); // TODO: remover
+
+    // Coordenadas de origem e destino
+    const origin = `${estimate.origin.latitude},${estimate.origin.longitude}`;
+    const destination = `${estimate.destination.latitude},${estimate.destination.longitude}`;
+
+    const url = new URL(baseUrl);
+    url.searchParams.set('key', apiKey!);
+    url.searchParams.set('size', '600x300'); // Tamanho do mapa
+    url.searchParams.set('maptype', 'roadmap');
+
+    // Marcadores para origem e destino
+    url.searchParams.set('markers', `color:green|label:A|${origin}`);
+    url.searchParams.set('markers', `color:red|label:B|${destination}`);
+
+    // Adicionar caminho da rota
+    const path = estimate.routeResponse?.routes[0]?.overview_polyline?.points;
+    if (path) {
+      url.searchParams.set('path', `color:0x0000ff|weight:5|enc:${path}`);
+    }
+
+    setMapUrl(url.toString());
+  }, [estimate]);
+
+  useEffect(() => {
+    if (estimate) generateStaticMapUrl();
+
+    if (!location.state) navigate('/');
+  }, [estimate, generateStaticMapUrl, location.state, navigate]);
 
   async function confirmRide(driverOption: Driver) {
     setIsLoading(true);
@@ -48,7 +83,22 @@ export function RideEstimateOptions() {
   return (
     <div className='container mx-auto space-y-4 flex flex-col items-center space-x-2'>
       <h2 className='text-2xl font-bold text-center'>Opções de Motoristas</h2>
-      <div className='space-y-4 pb-8'>
+
+      {mapUrl && (
+        <div className='w-full max-w-2xl mb-6'>
+          <img
+            src={mapUrl}
+            alt='Rota da Viagem'
+            className='w-full h-auto rounded-lg shadow-md'
+          />
+          <div className='mt-2 text-justify'>
+            <p>Distância: {estimate.distance.toFixed(2)} km</p>
+            <p>Duração estimada: {estimate.duration}</p>
+          </div>
+        </div>
+      )}
+
+      <div className='space-y-4 pb-8 w-full max-w-2xl'>
         {estimate?.options?.map((option: Driver) => (
           <Card key={option.id} className='w-full'>
             <CardHeader>
@@ -66,8 +116,6 @@ export function RideEstimateOptions() {
                 </>
               )}
               <p>Valor: R$ {option.value.toFixed(2)}</p>
-              <p>Distância: {estimate.distance.toFixed(2)} km</p>
-              <p>Duração: {estimate.duration}</p>
               <div className='flex space-x-2'>
                 <Button
                   onClick={() => confirmRide(option)}

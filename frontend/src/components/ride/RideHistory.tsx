@@ -28,8 +28,6 @@ export function RideHistory() {
       });
       return;
     }
-    console.log(customerId);
-    console.log(driverId);
 
     setIsLoading(true);
     try {
@@ -38,8 +36,7 @@ export function RideHistory() {
         driverId
       );
       setRides(result.rides);
-      console.log(result.rides);
-      console.log(result);
+      console.log(result); // TODO: remover
     } catch (error) {
       toast({
         title: 'Erro',
