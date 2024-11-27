@@ -38,6 +38,10 @@ Aplicação de gerenciamento de corridas utilizando Google Routes API, desenvolv
 
 - [Tailwind CSS](https://tailwindcss.com/) (v3.4.15)
 
+### API
+
+- [Google Routes API](https://developers.google.com/maps/documentation/routes)
+
 ## Configuração do Projeto
 
 ### Pré-requisitos

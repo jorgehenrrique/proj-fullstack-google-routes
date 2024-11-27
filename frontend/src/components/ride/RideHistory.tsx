@@ -36,7 +36,6 @@ export function RideHistory() {
         driverId
       );
       setRides(result.rides);
-      console.log(result); // TODO: remover
     } catch (error) {
       toast({
         title: 'Erro',
@@ -90,16 +89,18 @@ export function RideHistory() {
         {rides.map((ride, index) => (
           <Card key={ride.id + index}>
             <CardHeader>
-              <CardTitle>Corrida #{ride.id}</CardTitle>
+              <CardTitle>
+                Data: {new Date(ride.date).toLocaleString()}
+              </CardTitle>
             </CardHeader>
             <CardContent>
-              <p>Data: {new Date(ride.date).toLocaleString()}</p>
               <strong>Motorista: {ride.driver.name}</strong>
               <p>Origem: {ride.origin}</p>
               <p>Destino: {ride.destination}</p>
               <p>Distância: {ride.distance.toFixed(2)} km</p>
               <p>Duração: {ride.duration}</p>
               <p>Valor: R$ {ride.value.toFixed(2)}</p>
+              <span>Corrida #{ride.id}</span>
             </CardContent>
           </Card>
         ))}

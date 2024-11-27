@@ -46,7 +46,6 @@ export function RideRequestForm() {
           requestData: values,
         },
       });
-      console.log(estimate); // TODO: remover
     } catch (error) {
       toast({
         title: 'Erro',
@@ -103,7 +102,11 @@ export function RideRequestForm() {
             </FormItem>
           )}
         />
-        <Button type='submit' className='w-full' disabled={isLoading}>
+        <Button
+          type='submit'
+          className='w-full'
+          disabled={isLoading || !form.formState.isValid}
+        >
           {isLoading ? 'Estimando...' : 'Estimar Corrida'}
         </Button>
       </form>

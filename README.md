@@ -1,4 +1,8 @@
-# Projeto
+# Projeto Ride App - Google Routes
+
+## Descrição do Projeto
+
+Aplicação de gerenciamento de corridas utilizando Google Routes API, desenvolvida com React, TypeScript e Vite no frontend, e Node.js com Express e MongoDB no backend.
 
 ## Comandos para trabalhar com o projeto
 
@@ -72,3 +76,50 @@ docker-compose down -v
 1. O arquivo .env deve estar na raiz do projeto
 2. A variável GOOGLE_API_KEY deve estar configurada no .env
 3. As portas 80 e 8080 devem estar disponíveis no seu sistema
+
+## Estrutura do Projeto
+
+```
+ride-app/
+├── backend/
+│   ├── src/
+│   │   ├── config/
+│   │   ├── controllers/
+│   │   ├── middlewares/
+│   │   ├── models/
+│   │   ├── routes/
+│   │   ├── services/
+│   │   ├── types/
+│   │   └── server.ts
+│   ├── .env
+│   ├── package.json
+│   ├── tsconfig.json
+│   ├── toutes.http
+│   └── README.md
+│
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── layout/
+│   │   │   ├── ride/
+│   │   │   └── ui/
+│   │   ├── hooks/
+│   │   ├── services/
+│   │   ├── styles/
+│   │   ├── types/
+│   │   ├── App.tsx
+│   │   └── main.tsx
+│   ├── .env
+│   ├── package.json
+│   ├── tsconfig.json
+│   ├── index.html
+│   └── README.md
+│
+├── .env
+├── docker-compose.yml
+└── README.md
+```
+
+## Autor
+
+[GitHub](https://github.com/jorgehenrrique)

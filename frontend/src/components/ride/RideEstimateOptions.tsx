@@ -23,7 +23,6 @@ export function RideEstimateOptions() {
     // Construir URL do mapa estático do Google
     const baseUrl = 'https://maps.googleapis.com/maps/api/staticmap';
     const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
-    console.log(apiKey); // TODO: remover
 
     // Coordenadas de origem e destino
     const origin = `${estimate.origin.latitude},${estimate.origin.longitude}`;

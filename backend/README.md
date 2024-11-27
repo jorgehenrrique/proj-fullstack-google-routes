@@ -14,6 +14,8 @@ Esta API gerencia corridas, permitindo estimativa, confirmação e listagem de v
 
 #### Requisição
 
+- **Payload:**
+
 ```json
 {
   "customer_id": "string",
@@ -60,6 +62,8 @@ Esta API gerencia corridas, permitindo estimativa, confirmação e listagem de v
 - **Descrição:** Confirma e salva uma corrida
 
 #### Requisição
+
+- **Payload:**
 
 ```json
 {
@@ -182,3 +186,7 @@ GET http://localhost:8080/ride/1?driver_id=2
 2. Instale dependências: `npm install`
 3. Configure variáveis de ambiente
 4. Inicie o servidor: `npm run dev`
+
+## Autor
+
+[GitHub](https://github.com/jorgehenrrique)
