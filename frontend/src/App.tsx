@@ -6,7 +6,7 @@ function App() {
   return (
     <div className='min-h-screen flex flex-col mx-auto h-screen'>
       <Header />
-      <main className='flex-grow pt-20'>
+      <main className='flex-grow pt-28 sm:pt-20'>
         <Outlet />
       </main>
       <Toaster />
